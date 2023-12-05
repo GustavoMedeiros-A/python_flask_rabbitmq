@@ -9,7 +9,7 @@ class RabbitmqPublisher:
         self.__username = "rabbitmq"
         self.__password = "rabbitmq"
         self.__exchange = "queue_exchange"
-        self.__routing_queue = ''
+        self.__routing_queue = 'RK' # Usado para ter a mesma exchange em mais de uma fila (Trocar o envio das mensagens)
         self.__channel = self.__create_channel()
         
     def __create_channel(self):
