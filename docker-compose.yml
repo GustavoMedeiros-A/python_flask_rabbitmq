@@ -1,0 +1,38 @@
+version: "3.7"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: rabbitmq
+    tty: true
+    environment:
+      - "RABBITMQ_ERLANG_COOKIE=SWQOKODSQALRPCLNMEQG"
+      - "RABBITMQ_DEFAULT_USER=rabbitmq"
+      - "RABBITMQ_DEFAULT_PASS=rabbitmq"
+      - "RABBITMQ_DEFAULT_VHOST=/"
+    ports:
+      - 15672:15672 # UI  -> localhost:15672
+      - 5672:5672 # AMQP -> Aplications
+    networks:
+      - default-svc-network
+
+  mongodb:
+    image: mongo:3.6
+    container_name: mongodb
+    hostname: mongodb
+    tty: true
+    environment:
+      - "MONGO_INITDB_ROOT_USERNAME=admin"
+      - "MONGO_INITDB_ROOT_PASSWORD=admin"
+      - "MONGO_INITDB_DATABASE=initialdb"
+    ports:
+      - 27017:27017
+      - 27018:27018
+    networks:
+      - default-svc-network
+
+networks:
+  default-svc-network:
+    external: true
+    name: default-svc-network
